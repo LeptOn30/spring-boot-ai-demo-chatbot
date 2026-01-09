@@ -1,0 +1,38 @@
+services:
+  ollama:
+    image: 'ollama/ollama:latest'
+    ports:
+      - '11434'
+  pgvector:
+    image: 'pgvector/pgvector:pg16'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=vector_store
+    labels:
+      - "org.springframework.boot.service-connection=postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/vector_store
+  #     - SPRING_AI_OLLAMA_BASE_URL=http://host.docker.internal:11434
+  #   depends_on:
+  #     - pgvector
+
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "5173:80"
+  #   depends_on:
+  #     - backend
+
+volumes:
+  postgres_data:

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: backend-spring-boot-ai
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: llama3
+      embedding:
+        model: mxbai-embed-large
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        dimension: 1024
+        distance-type: COSINE_DISTANCE
+        initialize-schema: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vector_store
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8080
+
+app:
+  system-prompt: You are a helpful HR assistant.
+  chunk-size: 800
+  retention-period-days: 30
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
