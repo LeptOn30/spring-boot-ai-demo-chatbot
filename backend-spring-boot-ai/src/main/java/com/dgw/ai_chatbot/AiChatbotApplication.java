@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class AiChatbotApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChatbotApplication.class, args);
+		SpringApplication.run(AiChatbotApplication.class, args);
 	}
 
 	@Bean

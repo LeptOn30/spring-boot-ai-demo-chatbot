@@ -2,7 +2,7 @@ package com.dgw.ai_chatbot.services;
 
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+//import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
@@ -17,12 +17,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+
 import reactor.core.publisher.Flux;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 
 @Service
 public class ChatService {
@@ -49,7 +52,7 @@ public class ChatService {
     }
 
     public String chat(String message, String source) {
-        SearchRequest searchRequest = SearchRequest.query(message).withTopK(2);
+        SearchRequest searchRequest = SearchRequest.builder().query(message).topK(chunkSize).build();
         if (source != null && !source.isBlank()) {
             searchRequest = searchRequest.withFilterExpression("source == '" + source + "'");
         }
