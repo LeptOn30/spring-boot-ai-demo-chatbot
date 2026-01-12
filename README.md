@@ -1,4 +1,4 @@
-# Spring Boot AI Demo Chatbot
+# Spring Boot and Spring AI Demo Chatbot
 
 A full-stack chatbot application demonstrating Spring Boot AI, Ollama (local LLM), PgVector (Vector Database), and a React + TypeScript frontend.
 
